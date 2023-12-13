@@ -15,9 +15,12 @@ import api, {
 
 import "./Detalhes.css";
 import { UserContext } from "../../context/AuthContext";
+import { useParams } from "react-router-dom";
 
 const Detalhes = () => {
-  // state do menu mobile
+  // state do menu 
+  
+  // const{idEvento} = useParams();
 
   const [eventos, setEventos] = useState([]);
   const [comentarios, setComentarios] = useState([]);
@@ -47,9 +50,10 @@ const Detalhes = () => {
   async function listarComentarios(){
     try {
       const listaTodos = await api.get(commentaryEventResource);
+      console.log("ver aquiiiiiiiiiiiiiiiiiiiiiii");
       console.log(listaTodos.data);
 
-      setComentario(listaTodos.data);
+      setComentarios(listaTodos.data);
     } catch (error) {
       console.log(error);
     }
@@ -267,7 +271,7 @@ const Detalhes = () => {
             additionalClass="select-tp-evento"
           /> */}
           <TableD
-            dados={comentario}
+            dados={comentarios}
             fnConnect={handleConnect}
             fnShowModal={showHideModal}
           />

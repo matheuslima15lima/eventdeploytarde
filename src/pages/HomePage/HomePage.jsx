@@ -11,12 +11,13 @@ import Container from "../../components/Container/Container";
 import api from "../../Services/Service";
 import Notification from "../../components/Notification/Notification";
 import { nextEventResource } from "../../Services/Service";
+import { Link } from "react-router-dom";
 
 
 const HomePage = () => {
   const [nextEvents, setNextEvents] = useState([]);
   const [notifyUser, setNotifyUser] = useState(); //Componente Notification
-
+{/* <Link to={`/detalhes-evento/${idEvento}`}>Detalhes do Evento</Link> */}
   // roda somente na inicialização do componente
   useEffect(() => {
     async function getNextEvents() {

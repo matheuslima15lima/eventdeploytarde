@@ -12,7 +12,7 @@ import { Tooltip } from "react-tooltip";
 // import trashDelete from "../../../assets/images/trash-delete.svg";
 
 const Table = ({ dados, fnDelete = null, fnUpdate = null }) => {
-  // console.log(dados);
+  console.log(dados);
   return (
     <table className="table-data">
       <thead className="table-data__head">
@@ -57,7 +57,7 @@ const Table = ({ dados, fnDelete = null, fnUpdate = null }) => {
                 />
               </td>
               <td className="table-data__data table-data__data--big">
-                {tp.tiposEvento.titulo}
+                {/* {tp.tiposEvento.titulo} */}
               </td>
               <td className="table-data__data table-data__data--big">
                 {dateFormateDbToView(tp.dataEvento)}

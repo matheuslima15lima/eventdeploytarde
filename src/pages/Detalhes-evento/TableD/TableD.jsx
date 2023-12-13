@@ -21,6 +21,12 @@ const TableD = ({ dados, fnConnect = null, fnShowModal = null }) => {
           <th className="tbal-data__head-title tbal-data__head-title--big">
            FeedBack
           </th>
+          <th className="tbal-data__head-title tbal-data__head-title--big">
+           Situação
+          </th>
+          <th className="tbal-data__head-title tbal-data__head-title--big">
+           Evento
+          </th>
           {/* <th className="tbal-data__head-title tbal-data__head-title--big">
             Ações
           </th> */}
@@ -37,6 +43,14 @@ const TableD = ({ dados, fnConnect = null, fnShowModal = null }) => {
               <td className="tbal-data__data tbal-data__data--big tbal-data__btn-actions">
                 {/* {e.dataEvento} */}
                 {(e.descricao)}
+              </td>
+              <td className="tbal-data__data tbal-data__data--big tbal-data__btn-actions">
+               
+                {(e.exibe)}
+              </td>
+              <td className="tbal-data__data tbal-data__data--big tbal-data__btn-actions">
+               
+                {(e.idEvento)}
               </td>
 {/* 
               <td className="tbal-data__data tbal-data__data--big tbal-data__btn-actions">
