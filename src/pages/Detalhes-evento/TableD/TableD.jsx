@@ -21,27 +21,27 @@ const TableD = ({ dados, fnConnect = null, fnShowModal = null }) => {
           <th className="tbal-data__head-title tbal-data__head-title--big">
            FeedBack
           </th>
-          <th className="tbal-data__head-title tbal-data__head-title--big">
+          {/* <th className="tbal-data__head-title tbal-data__head-title--big">
             Ações
-          </th>
+          </th> */}
         </tr>
-      </thead>
+     </thead>
       <tbody>
         {dados.map((e) => {
           return (
             <tr className="tbal-data__head-row" key={Math.random()}>
               <td className="tbal-data__data tbal-data__data--big">
-                {e.nomeEvento}
+                {e.idUsuario}
               </td>
 
               <td className="tbal-data__data tbal-data__data--big tbal-data__btn-actions">
                 {/* {e.dataEvento} */}
-                {dateFormateDbToView(e.dataEvento)}
+                {(e.descricao)}
               </td>
-
+{/* 
               <td className="tbal-data__data tbal-data__data--big tbal-data__btn-actions">
                 {/* imagem do comentário - abre o modal */}
-                {new Date(e.dataEvento) < Date.now() ? (
+                {/* {new Date(e.dataEvento) < Date.now() ? (
                   <img
                     className="tbal-data__icon"
                     // idevento={e.idEvento}
@@ -68,7 +68,7 @@ const TableD = ({ dados, fnConnect = null, fnShowModal = null }) => {
                         }
                   }
                 />
-              </td>
+              </td> */} 
             </tr>
           );
         })}

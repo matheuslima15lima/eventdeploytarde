@@ -48,6 +48,8 @@ const Detalhes = () => {
     try {
       const listaTodos = await api.get(commentaryEventResource);
       console.log(listaTodos.data);
+
+      setComentario(listaTodos.data);
     } catch (error) {
       console.log(error);
     }
@@ -265,7 +267,7 @@ const Detalhes = () => {
             additionalClass="select-tp-evento"
           /> */}
           <TableD
-            dados={eventos}
+            dados={comentario}
             fnConnect={handleConnect}
             fnShowModal={showHideModal}
           />
