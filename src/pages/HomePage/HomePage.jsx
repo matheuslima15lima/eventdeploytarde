@@ -10,7 +10,7 @@ import NextEvent from "../../components/NextEvent/NextEvent";
 import Container from "../../components/Container/Container";
 import api from "../../Services/Service";
 import Notification from "../../components/Notification/Notification";
-import { nextEventResource } from "../../Services/Service";
+import { nextEventResource, eventsResource } from "../../Services/Service";
 import { Link } from "react-router-dom";
 
 
@@ -22,7 +22,7 @@ const HomePage = () => {
   useEffect(() => {
     async function getNextEvents() {
       try {
-        const promise = await api.get(nextEventResource);
+        const promise = await api.get(eventsResource);//AGORA TRAZENDO TODOS OS EVENTOS AO INVÉS DE SÓ OS PRÓXIMOS
         const dados = await promise.data;
         // console.log(dados);
         setNextEvents(dados); //atualiza o state
@@ -39,6 +39,8 @@ const HomePage = () => {
         // });
       }
     }
+
+    
 
     getNextEvents(); //chama a função
   }, []);
@@ -63,6 +65,8 @@ const HomePage = () => {
                   description={e.descricao}
                   eventDate={e.dataEvento}
                   idEvent={e.idEvento}
+
+                  
                 />
               );
             })}

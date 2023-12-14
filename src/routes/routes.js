@@ -51,7 +51,7 @@ const Rotas = () => {
 
         <Route element={<LoginPage />} path="/login" />
         <Route element={<TestePage />} path="/testes" />
-        <Route element={<Detalhes />} path="/detalhes:idEvento" />
+        <Route element={<Detalhes />} path="/detalhes/:idEvento" />
 
       </Routes>
 

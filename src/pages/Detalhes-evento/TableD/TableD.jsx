@@ -11,6 +11,9 @@ import "react-tooltip/dist/react-tooltip.css";
 import "./TableD.css";
 
 const TableD = ({ dados, fnConnect = null, fnShowModal = null }) => {
+
+
+  console.log(dados);
   return (
     <table className="tbal-data">
       <thead className="tbal-data__head">
@@ -46,7 +49,7 @@ const TableD = ({ dados, fnConnect = null, fnShowModal = null }) => {
               </td>
               <td className="tbal-data__data tbal-data__data--big tbal-data__btn-actions">
                
-                {(e.exibe)}
+                {e.exibe ? "sim": "não" }
               </td>
               <td className="tbal-data__data tbal-data__data--big tbal-data__btn-actions">
                

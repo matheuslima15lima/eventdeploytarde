@@ -38,8 +38,9 @@ const Detalhes = () => {
   // recupera os dados globais do usuário
   const { userData } = useContext(UserContext);
   const [comentario, setComentario] = useState("");
-  const [idEvento, setIdEvento] = useState("");
   const [idComentario, setIdComentario] = useState(null);
+  const {idEvento} = useParams();
+
 
   useEffect(() => {
     loadEventsType();
@@ -49,7 +50,9 @@ const Detalhes = () => {
     //GET DE COMENTARIOS
   async function listarComentarios(){
     try {
-      const listaTodos = await api.get(commentaryEventResource);
+      const listaTodos = await api.get(`${commentaryEventResource}/ListarSomenteExibe?id=${idEvento}`);
+
+      // ListarSomenteExibe?id=3ca40a8c-095f-4a4e-8248-4fc354d67bb9
       console.log("ver aquiiiiiiiiiiiiiiiiiiiiiii");
       console.log(listaTodos.data);
 
@@ -155,7 +158,7 @@ const Detalhes = () => {
 
     setShowModal(showModal ? false : true);
     // setUserData({ ...userData, idEvento: idEvent });
-    setIdEvento(idEvent);
+    // setIdEvento(idEvent);
     // console.log("após guardar no state do usuário");
     // console.log(idEvent);
   };
