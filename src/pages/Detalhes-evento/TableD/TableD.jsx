@@ -9,9 +9,13 @@ import "react-tooltip/dist/react-tooltip.css";
 
 // import trashDelete from "../../../assets/images/trash-delete.svg";
 import "./TableD.css";
+import api, { User } from "../../../Services/Service";
 
 const TableD = ({ dados, fnConnect = null, fnShowModal = null }) => {
 
+  
+ 
+ 
 
   console.log(dados);
   return (
@@ -40,7 +44,7 @@ const TableD = ({ dados, fnConnect = null, fnShowModal = null }) => {
           return (
             <tr className="tbal-data__head-row" key={Math.random()}>
               <td className="tbal-data__data tbal-data__data--big">
-                {e.idUsuario}
+                {(e.usuario.nome)}
               </td>
 
               <td className="tbal-data__data tbal-data__data--big tbal-data__btn-actions">
@@ -53,7 +57,7 @@ const TableD = ({ dados, fnConnect = null, fnShowModal = null }) => {
               </td>
               <td className="tbal-data__data tbal-data__data--big tbal-data__btn-actions">
                
-                {(e.idEvento)}
+                {(e.evento.nomeEvento)}
               </td>
 {/* 
               <td className="tbal-data__data tbal-data__data--big tbal-data__btn-actions">

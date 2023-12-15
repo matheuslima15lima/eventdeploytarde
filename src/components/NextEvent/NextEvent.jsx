@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./NextEvent.css";
 
 import { Tooltip } from "react-tooltip";
@@ -6,16 +6,20 @@ import { Tooltip } from "react-tooltip";
 // importar a função lá do arquivo stringFunction (destructuring)
 import { dateFormatDbToView } from "../../Utils/stringFunctions";
 import { Link, redirect } from "react-router-dom";
+import Detalhes from "../../pages/Detalhes-evento/Detalhes";
 
 
 const NextEvent = ({ title, description, eventDate, idEvent }) => {
-  // function conectar(idEvent) {
-  //   // dá pra usar a prop idEvent? testar
-  //   alert(`Chamar o recurso para conectar: ${idEvent}`);
-  // }
+
+  // const {idEvento, setIdEvento} = useState({});
+
+  function conectar(idEvent) {
+    // dá pra usar a prop idEvent? testar
+    alert(`Chamar o recurso para conectar: ${idEvent}`);
+  }
 // const NextEvent = ({ title, description, eventDate, idEvent }) => {
 //   function visualizar(idEvent) {
-//     redirect = "/detalhes/:idEvento"
+//     <Link to = "/detalhes/:idEvento" ></Link>  
 //   }
 
   return (
@@ -40,11 +44,11 @@ const NextEvent = ({ title, description, eventDate, idEvent }) => {
       </p>
       
 
-      {dateFormatDbToView(eventDate) <= Date.now()?
-       ( <Link to = "/detalhes/:idEvento"
-        // onClick={() => {
-        //   conectar(idEvent);
-        // }}
+      {eventDate <= Date.now()?
+       ( <Link to = "/detalhes/:idEvento" component={Detalhes}
+        onClick={() => {
+          conectar(idEvent);
+        }}
        
         className="event-card__connect-link"
       >
@@ -53,10 +57,10 @@ const NextEvent = ({ title, description, eventDate, idEvent }) => {
        )
       :
       (
-        <Link to = "/detalhes/:idEvento"
-      // onClick={() => {
-      //   conectar(idEvent);
-      // }}
+          <Link to = {`/detalhes/${idEvent}`}
+      onClick={() => {
+        conectar(idEvent);
+      }}
       className="event-card__connect-link"
     >
      

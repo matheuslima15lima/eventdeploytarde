@@ -40,6 +40,8 @@ export const institutionResource = '/Instituicao';
  */
 export const loginResource = '/Login';
 
+export const User = '/Usuario';
+
 const apiPort = '5000';
 // const localApiUri = `http://localhost:${apiPort}/api`;
 const externallApiUri = `https://eventapiwebmatheusl.azurewebsites.net/api`;
