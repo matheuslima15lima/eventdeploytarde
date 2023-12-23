@@ -47,7 +47,7 @@ const Detalhes = () => {
     // loadEventsType();
     listarComentarios();
     // buscarUsuarioPorId();
-  }, [tipoEvento, userData.userId]); //
+  }, [userData.role]); //
 
   //funcao buscar por id
 
@@ -58,18 +58,44 @@ const Detalhes = () => {
 //    return (buscando.data);
   
 // }
-
+  
     //GET DE COMENTARIOS
   async function listarComentarios(){
     try {
-      const listaTodos = await api.get(commentaryEventResource +`/ListarSomenteExibe?id=${idEvento}`);
+     // if(userData.role === "Administrador"){
+        const listAll = await api.get(commentaryEventResource +`?id=${idEvento}`);
+        
+        const listOnlyShow = await api.get(commentaryEventResource +`/ListarSomenteExibe?id=${idEvento}`);
 
-      // ListarSomenteExibe?id=3ca40a8c-095f-4a4e-8248-4fc354d67bb9
-      console.log("ver aquiiiiiiiiiiiiiiiiiiiiiii");
-      console.log(listaTodos.data);
 
-      setComentarios(listaTodos.data);
-    } catch (error) {
+        console.log(userData.role);
+
+        //filter para trazer somente os comentarios do evento escolhido
+        const myComm = await listAll.data.filter(
+          (comm) => comm.idEvento === idEvento
+        );
+
+
+          // Chamo o filter aqui pois ele tras a listagem como eu preciso
+        setComentarios(userData.role === "Administrador" ? myComm : listOnlyShow.data);
+        
+       
+      //}
+   
+      //else{
+
+        //const listaTodos = await api.get(commentaryEventResource +`/ListarSomenteExibe?id=${idEvento}`);
+
+        // ListarSomenteExibe?id=3ca40a8c-095f-4a4e-8248-4fc354d67bb9
+        //console.log("ver aquiiiiiiiiiiiiiiiiiiiiiii");
+       // console.log(listaTodos.data);
+
+       // setComentarios(listaTodos.data);
+      }
+      
+
+     
+    catch (error) {
       console.log(error);
     }
   }
@@ -118,4 +144,3 @@ const Detalhes = () => {
 
 
  
-
