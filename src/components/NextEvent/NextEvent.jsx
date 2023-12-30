@@ -7,9 +7,10 @@ import { Tooltip } from "react-tooltip";
 import { dateFormatDbToView } from "../../Utils/stringFunctions";
 import { Link, redirect } from "react-router-dom";
 import Detalhes from "../../pages/Detalhes-evento/Detalhes";
+import Toggle from "../Toggle/Toggle";
 
 
-const NextEvent = ({ title, description, eventDate, idEvent }) => {
+const NextEvent = ({ title, description, eventDate, idEvent, s }) => {
 
   // const {idEvento, setIdEvento} = useState({});
 
@@ -17,10 +18,15 @@ const NextEvent = ({ title, description, eventDate, idEvent }) => {
     // dá pra usar a prop idEvent? testar
     alert(`Chamar o recurso para conectar: ${idEvent}`);
   }
-// const NextEvent = ({ title, description, eventDate, idEvent }) => {
-//   function visualizar(idEvent) {
-//     <Link to = "/detalhes/:idEvento" ></Link>  
-//   }
+
+  function visualizar(idEvent) {
+    // dá pra usar a prop idEvent? testar
+    alert(`Chamar o recurso para conectar: ${idEvent}`);
+  }
+  // const NextEvent = ({ title, description, eventDate, idEvent }) => {
+    //   function visualizar(idEvent) {
+      //     <Link to = "/detalhes/:idEvento" ></Link>  
+      //   }
 
   return (
     <article className="event-card">
@@ -34,7 +40,8 @@ const NextEvent = ({ title, description, eventDate, idEvent }) => {
         data-tooltip-place="top"
       >
         <Tooltip id={idEvent} className="tooltip" />
-        {description.substr(0, 15)} ...
+          {description.substr(0, 15)} ...  
+       
       </p>
 
       <p className="event-card__description">
@@ -44,22 +51,25 @@ const NextEvent = ({ title, description, eventDate, idEvent }) => {
       </p>
       
 
-      {eventDate <= Date.now()?
-       ( <Link to = "/detalhes/:idEvento" component={Detalhes}
+      {new Date(eventDate) < Date.now()?
+        <Link to  = {`/detalhes/${idEvent}`}
         onClick={() => {
           conectar(idEvent);
+          
         }}
        
         className="event-card__connect-link"
       >
         Visualizar
         </Link>
-       )
+        //Tag link aqui (TAG DE FECHAMENTO)
+       
       :
-      (
+      
           <Link to = {`/detalhes/${idEvent}`}
       onClick={() => {
         conectar(idEvent);
+
       }}
       className="event-card__connect-link"
     >
@@ -67,7 +77,7 @@ const NextEvent = ({ title, description, eventDate, idEvent }) => {
         Conectar
         </Link>
     
-      )
+      
       }
  
     </article>

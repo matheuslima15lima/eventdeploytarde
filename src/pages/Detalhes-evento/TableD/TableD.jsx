@@ -3,6 +3,7 @@ import comentaryIcon from "../../../assets/images/comentary-icon.svg";
 import { dateFormateDbToView } from "../../../Utils/stringFunctions";
 import ToggleSwitch from "../../../components/Toggle/Toggle";
 import { UserContext } from "../../../context/AuthContext";
+
 // importa a biblioteca de tootips ()
 import "react-tooltip/dist/react-tooltip.css";
 // import { Tooltip } from "react-tooltip";
@@ -34,9 +35,7 @@ const TableD = ({ dados, fnConnect = null, fnShowModal = null }) => {
           <th className="tbal-data__head-title tbal-data__head-title--big">
            Evento
           </th>
-          {/* <th className="tbal-data__head-title tbal-data__head-title--big">
-            Ações
-          </th> */}
+      
         </tr>
      </thead>
       <tbody>
@@ -59,6 +58,9 @@ const TableD = ({ dados, fnConnect = null, fnShowModal = null }) => {
                
                 {(e.evento.nomeEvento)}
               </td>
+
+              
+              
 {/* 
               <td className="tbal-data__data tbal-data__data--big tbal-data__btn-actions">
                 {/* imagem do comentário - abre o modal */}
@@ -85,10 +87,7 @@ const TableD = ({ dados, fnConnect = null, fnShowModal = null }) => {
                           );
                         }
                       : () => {
-                          alert("Evento não está mais disponível");
-                        }
-                  }
-                />
+                          alert("Evento 
               </td> */} 
             </tr>
           );

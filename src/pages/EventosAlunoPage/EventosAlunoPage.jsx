@@ -257,6 +257,7 @@ const EventosAlunoPage = () => {
             dados={eventos}
             fnConnect={handleConnect}
             fnShowModal={showHideModal}
+            
           />
         </Container>
       </MainContent>

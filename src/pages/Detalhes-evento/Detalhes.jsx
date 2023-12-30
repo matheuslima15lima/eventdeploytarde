@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import MainContent from "../../components/MainContent/MainContent";
 import Title from "../../components/Title/Title";
 import TableD from "./TableD/TableD";
+import TableDaluno from "./TableD/TableDaluno";
 import Container from "../../components/Container/Container";
 import { Select } from "../../components/FormComponents/FormComponents";
 import Spinner from "../../components/Spinner/Spinner";
@@ -23,7 +24,7 @@ const Detalhes = () => {
   
   // const{idEvento} = useParams();
 
-  const [eventos, setEventos] = useState([]);
+  const [eventos, setEventos] = useState({});
   const [comentarios, setComentarios] = useState([]);
   // select mocado
   // const [quaisEventos, setQuaisEventos] = useState([
@@ -47,6 +48,8 @@ const Detalhes = () => {
     // loadEventsType();
     listarComentarios();
     // buscarUsuarioPorId();
+    {console.log("VE AQUIIIIIIIIIII")}
+    console.log(eventos);
   }, [userData.role]); //
 
   //funcao buscar por id
@@ -58,6 +61,7 @@ const Detalhes = () => {
 //    return (buscando.data);
   
 // }
+
   
     //GET DE COMENTARIOS
   async function listarComentarios(){
@@ -67,10 +71,13 @@ const Detalhes = () => {
         
         const listOnlyShow = await api.get(commentaryEventResource +`/ListarSomenteExibe?id=${idEvento}`);
 
-
+        const findEvent = await api.get(eventsResource+`?id=${idEvento}`);
+        console.log("FIND EVENT FIND FIND FIND");
+        console.log(findEvent.data);
+        setEventos(findEvent.data);
         console.log(userData.role);
 
-        //filter para trazer somente os comentarios do evento escolhido
+        //filter para trazer somente os comentarios do evento escolhido ao inves de trazer os comentarios de diversos eventos
         const myComm = await listAll.data.filter(
           (comm) => comm.idEvento === idEvento
         );
@@ -107,7 +114,8 @@ const Detalhes = () => {
       <MainContent>
         <Container>
           <Title titleText={"Detalhes do Evento"} additionalClass="custom-title" />
-
+          
+           
           {/* <Select
             id="id-tipo-evento"
             name="tipo-evento"
@@ -117,11 +125,19 @@ const Detalhes = () => {
             defaultValue={tipoEvento}
             additionalClass="select-tp-evento"
           /> */}
+
+          
+          {userData.role === "Administrador"?//Se a role for diferente de adm, sera mostrada uma tabela sem coluna de situacao
           <TableD
             dados={comentarios}
             // fnConnect={handleConnect}
             // fnShowModal={showHideModal}
           />
+          :
+          <TableDaluno
+          dados={comentarios}
+          />
+        }
         </Container>
       </MainContent>
       {/* SPINNER -Feito com position */}

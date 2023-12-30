@@ -10,7 +10,7 @@ import NextEvent from "../../components/NextEvent/NextEvent";
 import Container from "../../components/Container/Container";
 import api from "../../Services/Service";
 import Notification from "../../components/Notification/Notification";
-import { nextEventResource, eventsResource } from "../../Services/Service";
+import { nextEventResource, eventsResource,  presencesEventResource } from "../../Services/Service";
 import { Link } from "react-router-dom";
 
 
@@ -44,7 +44,6 @@ const HomePage = () => {
 
     getNextEvents(); //chama a função
   }, []);
-
   return (
     
     <MainContent>
@@ -65,6 +64,7 @@ const HomePage = () => {
                   description={e.descricao}
                   eventDate={e.dataEvento}
                   idEvent={e.idEvento}
+                  s = {e.situacao}
 
                   
                 />
