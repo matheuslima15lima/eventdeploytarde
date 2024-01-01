@@ -12,12 +12,14 @@ import api, {
   myEventsResource,
   presencesEventResource,
   commentaryEventResource,
+  eventsTypeResource,
   User,
 } from "../../Services/Service";
 
 import "./Detalhes.css";
 import { UserContext } from "../../context/AuthContext";
 import { useParams } from "react-router-dom";
+import { dateFormatDbToView } from "../../Utils/stringFunctions";
 
 const Detalhes = () => {
   // state do menu 
@@ -26,6 +28,7 @@ const Detalhes = () => {
 
   const [eventos, setEventos] = useState({});
   const [comentarios, setComentarios] = useState([]);
+  const [dataEvento, setDataEvento] = useState({});
   // select mocado
   // const [quaisEventos, setQuaisEventos] = useState([
   const quaisEventos = [
@@ -33,20 +36,21 @@ const Detalhes = () => {
     { value: 2, text: "Meus eventos" },
   ];
 
-  const [tipoEvento, setTipoEvento] = useState("1"); //código do tipo do Evento escolhido
+  const [tipoEvento, setTipoEvento] = useState({}); //código do tipo do Evento escolhido
   const [showSpinner, setShowSpinner] = useState(false);
   const [showModal, setShowModal] = useState(false);
 
   // recupera os dados globais do usuário
   const { userData } = useContext(UserContext);
-  const [comentario, setComentario] = useState("");
-  const [idComentario, setIdComentario] = useState(null);
+  
   const {idEvento} = useParams();
 
 
   useEffect(() => {
     // loadEventsType();
     listarComentarios();
+    events();
+    typeEvents();
     // buscarUsuarioPorId();
     {console.log("VE AQUIIIIIIIIIII")}
     console.log(eventos);
@@ -62,6 +66,34 @@ const Detalhes = () => {
   
 // }
 
+    //Aqui eu busco as informações do evento
+    async function events(){
+      try {
+        
+        const findEvent = await api.get(eventsResource+`/${idEvento}`);
+        setEventos(findEvent.data.nomeEvento);
+
+        setDataEvento(findEvent.data.dataEvento);
+
+        
+
+      } catch (error) {
+        console.log("PROBLEMAS NO EVENTO");
+      }
+    }
+    
+    async function typeEvents(){
+      try {
+        
+        const findEvent = await api.get(eventsTypeResource+`/${idEvento}`);
+        
+
+        setTipoEvento(findEvent.data.titulo)
+
+      } catch (error) {
+        console.log("PROBLEMAS NO EVENTO");
+      }
+    }
   
     //GET DE COMENTARIOS
   async function listarComentarios(){
@@ -71,11 +103,7 @@ const Detalhes = () => {
         
         const listOnlyShow = await api.get(commentaryEventResource +`/ListarSomenteExibe?id=${idEvento}`);
 
-        const findEvent = await api.get(eventsResource+`?id=${idEvento}`);
-        console.log("FIND EVENT FIND FIND FIND");
-        console.log(findEvent.data);
-        setEventos(findEvent.data);
-        console.log(userData.role);
+        
 
         //filter para trazer somente os comentarios do evento escolhido ao inves de trazer os comentarios de diversos eventos
         const myComm = await listAll.data.filter(
@@ -113,9 +141,12 @@ const Detalhes = () => {
     <>
       <MainContent>
         <Container>
-          <Title titleText={"Detalhes do Evento"} additionalClass="custom-title" />
-          
-           
+          <Title titleText={`Detalhes do Evento ${eventos}`} additionalClass="custom-title"  />
+          <Title titleText={`Tipo de Evento ${tipoEvento}`} additionalClass="custom-title"  />
+          {/*toLocaleDateString esta sendo usado devido o title não estar aceitando o dateFormatDbToView*/}
+          <Title titleText={`Data do Evento ${new Date(dataEvento).toLocaleDateString()}`} additionalClass="custom-title"  />
+            
+            
           {/* <Select
             id="id-tipo-evento"
             name="tipo-evento"
