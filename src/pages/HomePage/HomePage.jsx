@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
-import "./HomePage.css";
 
+import{Swiper, SwiperSlide} from 'swiper/react'
+import "./HomePage.css";
+import App from "../../App";
 import Banner from "../../components/Banner/Banner";
 import MainContent from "../../components/MainContent/MainContent";
 import VisionSection from "../../components/VisionSection/VisionSection";
@@ -12,6 +14,9 @@ import api from "../../Services/Service";
 import Notification from "../../components/Notification/Notification";
 import { nextEventResource, eventsResource,  presencesEventResource } from "../../Services/Service";
 import { Link } from "react-router-dom";
+
+
+
 
 
 const HomePage = () => {
@@ -56,8 +61,14 @@ const HomePage = () => {
           {/* <Title titleText={"Próximos Eventos"} /> */}
 
           <div className="events-box">
+            <Swiper
+              slidesPerView={3}
+              pagination ={{clickable: true}}
+              navigation
+            >
             {nextEvents.map((e) => {
               return (
+                <SwiperSlide>
                 <NextEvent
                   key={e.idEvento}
                   title={e.nomeEvento}
@@ -68,8 +79,10 @@ const HomePage = () => {
 
                   
                 />
+                </SwiperSlide>
               );
             })}
+            </Swiper>
           </div>
         </Container>
       </section>
