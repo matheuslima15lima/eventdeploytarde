@@ -11,6 +11,9 @@ import Toggle from "../Toggle/Toggle";
 
 
 const NextEvent = ({ title, description, eventDate, idEvent, s }) => {
+ // const [presenca, setPresenca] = useState({});
+
+  
 
   // const {idEvento, setIdEvento} = useState({});
 

@@ -157,18 +157,25 @@ const Detalhes = () => {
             additionalClass="select-tp-evento"
           /> */}
 
-          
-          {userData.role === "Administrador"?//Se a role for diferente de adm, sera mostrada uma tabela sem coluna de situacao
-          <TableD
+          {new Date(dataEvento) > Date.now()?
+            <Title titleText={`Evento ainda não ocorreu`} additionalClass="custom-title"  />
+            
+            :
+
+            (userData.role === "Administrador"?//Se a role for diferente de adm, sera mostrada uma tabela sem coluna de situacao
+            <TableD
+              dados={comentarios}
+              // fnConnect={handleConnect}
+              // fnShowModal={showHideModal}
+            />
+            :
+            <TableDaluno
             dados={comentarios}
-            // fnConnect={handleConnect}
-            // fnShowModal={showHideModal}
-          />
-          :
-          <TableDaluno
-          dados={comentarios}
-          />
+            />
+            )
+
         }
+         
         </Container>
       </MainContent>
       {/* SPINNER -Feito com position */}
